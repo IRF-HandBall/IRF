@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRF - Courses</title>
+    <link rel="icon" href="course.png">
+    <style>
+        * {
+            text-align: center;
+            box-sizing: border-box;
+        }
+        /* General CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 1% 10% 0%;
+        }
+
+        header {
+            background-color: hwb(234 16% 49%);
+            color: white;
+            padding: 20px 0;
+            margin: 0px 10px 4px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+
+        nav h1 {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        .course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .course {
+            background-color: #fafafa;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 5%;
+            }
+
+            header {
+                padding: 15px 0;
+            }
+
+            section {
+                margin: 5px;
+            }
+
+            .course {
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <a href="index.html">
+                <h1>IRF</h1>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <h2>Courses</h2>
+        <div class="course-container" id="course-container">
+            <!-- Existing Course -->
+            <div class="course">
+                <h3>Web Development Course</h3>
+                <p>Learn how to build professional websites using HTML, CSS, and JavaScript.</p>
+                <a href="https://chat.whatsapp.com/GZyjx9p0X7m7ajVdawXcCD" target="_blank">
+                    <button>Book Now</button>
+                </a>
+            </div>
+            <!-- Dynamically Added Courses Will Appear Here -->
+        </div>
+    </section>
+
+    <script>
+        // Function to load courses from Local Storage and display them
+        function loadCourses() {
+            const courseContainer = document.getElementById('course-container');
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+
+            courses.forEach(course => {
+                const courseDiv = document.createElement('div');
+                courseDiv.className = 'course';
+                courseDiv.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <a href="${course.link}" target="_blank">
+                        <button>Book Now</button>
+                    </a>
+                `;
+                courseContainer.appendChild(courseDiv);
+            });
+        }
+
+        // Load courses on page load
+        document.addEventListener('DOMContentLoaded', loadCourses);
+    </script>
+</body>
+</html>
